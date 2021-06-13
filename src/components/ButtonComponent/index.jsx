@@ -1,9 +1,9 @@
 import './styles.scss';
 
-export const NavbarComponent = ({text, isActive}) => {
+export const NavbarComponent = ({ text, isActive }) => {
     return (
-        <nav style={{backgroundColor: isActive?'blue':'red'}}>
-            {/* <CardWidget/> */}
+        <nav>
+            <h1>{text}</h1>
         </nav>
     )
 }
