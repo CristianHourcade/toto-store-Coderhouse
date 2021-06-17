@@ -1,15 +1,12 @@
-import { ButtonComponent } from '../ButtonComponent';
 import './styles.scss';
 
-export const CardComponent = ({ title, children, toto, }) => {
+export const CardComponent = ({ title, price, img }) => {
     return (
         <>
-            <div className="card">
-                {children}
+            <div className="card col-md-4">
+                <img src={img}/>
                 <h2>{title}</h2>
-                <h1>{toto.name}</h1>
-                <strong>{toto.price}</strong>
-                <ButtonComponent text={"Agregar al carrito"} isActive={false} />
+                <strong>{price}</strong>
             </div>
         </>
     )

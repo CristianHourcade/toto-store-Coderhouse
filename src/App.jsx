@@ -1,20 +1,47 @@
 import "./App.css";
-import { CardComponent } from "./components/CardComponent";
-import { NAME_APP, suma } from "./utils/const";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { TitleComponent } from "./components/Title";
-import { ButtonComponent } from "./components/ButtonComponent";
-import { HomeContainer } from "./containers/HomeContainer";
+import { useEffect, useState } from "react";
+import { getData } from './utils/const';
+import { CardComponent } from './components/CardComponent';
 
 function App() {
-  const product = [
-    { id: 1, name: 'niky', price: 23232 },
-    { id: 2, name: 'niky official', price: 9999 }
-  ];
+  let [productos, setProductos] = useState([]);
 
+  useEffect(() => {
+    // ya se monto
+    const waitForData = async () => {
+      let data = await getData('zapatillas'); // llamada a la api
+      let aux = data.map(element => {
+        return {
+          title: element.title,
+          img: element.thumbnail,
+          price: element.price
+        }
+      });
+      setProductos(aux);
+    }
+
+    waitForData();
+  }, [])
+
+  if (productos.length > 0) {
+    console.log(productos);
+  }
   return (
-    // <NavbarComponent/>
-    // <ItemListContainer greeting={"hhola :)"} />
+    <div>
+      <div className="container">
+        <div className="row">
+          {productos.length == 0 ? 'Hola toy cargando' : 'ya cargue'}
+          {productos.map((element,index) => {
+            return (
+              <span key={index}>
+                <CardComponent title={element.title} img={element.img} price={element.price} />
+              </span>
+            )
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 
